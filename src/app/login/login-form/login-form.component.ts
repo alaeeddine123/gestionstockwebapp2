@@ -7,9 +7,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginFormComponent implements OnInit {
 
+  Email!: string;
+  Password!: string;
+
+
+
+  
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  
+
+  LoginUser(){
+
+    if(this.Email == "admin@gmail.com" && this.Password == "password"){
+
+      alert('success login');
+      console.log("login sucessfully");
+    }else{
+      alert('call to function failed');
+    }
   }
 
 }
