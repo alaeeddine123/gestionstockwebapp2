@@ -1,96 +1,46 @@
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
 
-<div class="wrapper">
-   
-</div>
-    <div class="wrapper">
-        <div id="logreg-forms">
-            <form  id="form-signin" class="form-signin" ng-hide ="form-signin.$submit">
-                <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign in</h1>
-                <div class="social-login">
-                    <button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> Sign in with Facebook</span> </button>
-                    <button class="btn google-btn social-btn" type="button"><span><i class="fab fa-google-plus-g"></i> Sign in with Google+</span> </button>
-                </div>
-                <p style="text-align:center"> OR  </p>
-                <input type="email"  name = "inputEmail" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="" ng-model="Email">
-                <input type="password"  name = "inputPassword" id="inputPassword" class="form-control" placeholder="Password" required="" ng-model="password">
 
-                <form onsubmit="alert(' test test')"  routerLink ="/home" >
-                    
-                <button id ="btn" class="btn btn-success btn-block" type="submit"><i class="fas fa-sign-in-alt"></i> Sign in</button>
-                </form>
+  <body class="text-center">
 
-                 <!-- make sign in form dissapear after submit -->
-                 <script>
-                  const submit_login = document.getElementById("form-signin");
-                  e.preventDefault();
-                 </script>
-                <a href="#" id="forgot_pswd">Forgot password?</a>
-                <hr>
-                <!-- <p>Don't have an account!</p>  -->
-                <button class="btn btn-primary btn-block" type="button" id="btn-signup"><i class="fas fa-user-plus"></i> Sign up New Account</button>
-                </form>
+    <div class="login">
+    <form  [formGroup]="loginForm" class="login-container"  (ngSubmit)="login()">
 
-               
+      <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+      <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+      <label for="inputEmail" class="sr-only">Email address</label>
+     
+      <p [ngClass]="{ 'has-error': isSubmitted && formControls.email.errors }">
+      <input type="email" formControlName="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
+      </p>
 
-                 
-                <form action="/reset/password/" class="form-reset">
-                    <input type="email" id="resetEmail" class="form-control" placeholder="Email address" required="" autofocus="">
-                    <button class="btn btn-primary btn-block" type="submit">Reset Password</button>
-                    <a href="#" id="cancel_reset"><i class="fas fa-angle-left"></i> Back</a>
-                </form>
-                
-                <form action="/signup/" class="form-signup">
-                    <div class="social-login">
-                        <button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> Sign up with Facebook</span> </button>
-                    </div>
-                    <div class="social-login">
-                        <button class="btn google-btn social-btn" type="button"><span><i class="fab fa-google-plus-g"></i> Sign up with Google+</span> </button>
-                    </div>
-                    
-                    <p style="text-align:center">OR</p>
-    
-                    <input type="text" id="user-name" class="form-control" placeholder="Full name" required="" autofocus="">
-                    <input type="email" id="user-email" class="form-control" placeholder="Email address" required autofocus="">
-                    <input type="password" id="user-pass" class="form-control" placeholder="Password" required autofocus="">
-                    <input type="password" id="user-repeatpass" class="form-control" placeholder="Repeat Password" required autofocus="">
-    
-                    <button class="btn btn-primary btn-block" type="submit"><i class="fas fa-user-plus"></i> Sign Up</button>
-                    <a href="#" id="cancel_signup"><i class="fas fa-angle-left"></i> Back</a>
-                </form>
-                <br>
-                
-        </div>
-        <p style="text-align:center">
-            <a href="http://bit.ly/2RjWFMfunction toggleResetPswd(e){
-        e.preventDefault();
-        $('#logreg-forms .form-signin').toggle() // display:block or none
-        $('#logreg-forms .form-reset').toggle() // display:block or none
-    }
-    
-    function toggleSignUp(e){
-        e.preventDefault();
-        $('#logreg-forms .form-signin').toggle(); // display:block or none
-        $('#logreg-forms .form-signup').toggle(); // display:block or none
-    }
-    
-    $(()=>{
-        // Login Register Form
-        $('#logreg-forms #forgot_pswd').click(toggleResetPswd);
-        $('#logreg-forms #cancel_reset').click(toggleResetPswd);
-        $('#logreg-forms #btn-signup').click(toggleSignUp);
-        $('#logreg-forms #cancel_signup').click(toggleSignUp);
-    })g" target="_blank" style="color:black"> 2021/2022</a>
-        </p>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <script src="/script.js"></script>
-    
-</div>
-  
-  
+      <div *ngIf="isSubmitted && formControls.email.errors" class="help-block">
+        <div *ngIf="formControls.email.errors.required">Email is required</div>
+      </div>
+
+
+      <label for="inputPassword" class="sr-only">Password</label>
+
+      <p [ngClass]="{ 'has-error': isSubmitted && formControls.password.errors }">
+      <input type="password" id="inputPassword" class="form-control" formControlName="password" placeholder="Password" required>
+      </p>
+
+
+      <div class="checkbox mb-3">
+        <label>
+          <input type="checkbox" value="remember-me"> Remember me
+        </label>
+      </div>
+
+      <div *ngIf="isSubmitted && formControls.password.errors" class="help-block">
+        <div *ngIf="formControls.password.errors.required">Password is required</div>
+      </div>
+
+      <p>
+      <button class="btn btn-lg btn-primary btn-block" type="submit" value="Log in">Sign in</button>
+      </p>
+      
+      <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+    </form>
+  </div>
+  </body>
+ 
